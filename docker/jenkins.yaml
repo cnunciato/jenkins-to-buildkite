@@ -1,0 +1,72 @@
+jenkins:
+  numExecutors: 3
+  mode: NORMAL
+  markupFormatter:
+    rawHtml:
+      disableSyntaxHighlighting: false
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: admin
+          password: admin
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false
+  remotingSecurity:
+    enabled: true
+
+  # nodes:
+  # - permanent:
+  #     name: "agent1"
+  #     launcher: "inbound"
+  #     remoteFS: "/home/jenkins/agent"
+  #     retentionStrategy: "always"
+  # - permanent:
+  #     name: "agent2"
+  #     launcher: "inbound"
+  #     remoteFS: "/home/jenkins/agent"
+
+unclassified:
+  location:
+    adminAddress: "admin@example.com"
+    url: http://localhost:8080/
+  gitHubConfiguration:
+    apiRateLimitChecker: NoThrottle
+  gitHubPluginConfig:
+    hookUrl: "http://jenkins:8080/github-webhook/"
+
+tool:
+  nodejs:
+    installations:
+    - name: Node 22.x
+      properties:
+      - installSource:
+          installers:
+          - nodeJSInstaller:
+              id: 22.16.0
+              npmPackagesRefreshHours: 72
+
+jobs:
+  - script: |
+      multibranchPipelineJob('jenkins-to-buildkite') {
+          branchSources {
+              github {
+                  id('jenkins-to-buildkite')
+                  repoOwner('cnunciato')
+                  repository('jenkins-to-buildkite')
+              }
+          }
+          factory {
+              workflowBranchProjectFactory {
+                  scriptPath('Jenkinsfile')
+              }
+          }
+          
+          configure { node ->
+              def traits = node / sources / data / 'jenkins.branch.BranchSource' / source / traits
+              traits << 'org.jenkinsci.plugins.github__branch__source.BranchDiscoveryTrait' {
+                  strategyId(3)
+              }
+          }
+      }
