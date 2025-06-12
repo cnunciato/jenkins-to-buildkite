@@ -9,6 +9,7 @@ services:
     volumes:
       - ./jenkins.yaml:/var/jenkins_home/jenkins.yml
     environment:
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
       - CASC_JENKINS_CONFIG=/var/jenkins_home/jenkins.yml
       - ADMIN_USERNAME=${ADMIN_USERNAME:-admin}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
