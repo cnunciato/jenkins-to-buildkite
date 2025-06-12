@@ -7,4 +7,5 @@ github-branch-source
 job-dsl
 junit
 nodejs
+workflow-aggregator
 workflow-multibranch

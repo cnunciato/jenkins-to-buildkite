@@ -1,11 +1,20 @@
 pipeline {
-  agent any
+    agent any
 
-  stage {
-    stage('Greet') {
-      steps {
-        sh 'echo "Hi!"'
-      }
+    tools {
+        nodejs "Node 22.x"
     }
-  }
+
+    stages {
+        stage('Install') {
+            steps {
+                sh 'npm install'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'npm test'
+            }
+        }
+    }
 }

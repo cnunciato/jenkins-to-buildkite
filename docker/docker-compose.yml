@@ -9,31 +9,35 @@ services:
     volumes:
       - ./jenkins.yaml:/var/jenkins_home/jenkins.yml
     environment:
-      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
+      # - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
       - CASC_JENKINS_CONFIG=/var/jenkins_home/jenkins.yml
       - GITHUB_USERNAME=cnunciato
       - GITHUB_TOKEN=${GITHUB_TOKEN}
       - ADMIN_USERNAME=admin
       - ADMIN_PASSWORD=admin
-  # agent1:
-  #   build: 
-  #     context: .
-  #     dockerfile: agent.dockerfile
-  #   environment:
-  #     - JENKINS_AGENT_NAME=agent1
-  #     - JENKINS_URL=http://jenkins:8080
-  #     - JENKINS_AGENT_WORKDIR=/home/jenkins/agent
-  #     - JENKINS_WEB_SOCKET=true
-  #   depends_on:
-  #     - jenkins
-  # agent2:
-  #   build: 
-  #     context: .
-  #     dockerfile: agent.dockerfile
-  #   environment:
-  #     - JENKINS_AGENT_NAME=agent2
-  #     - JENKINS_URL=http://jenkins:8080
-  #     - JENKINS_AGENT_WORKDIR=/home/jenkins/agent
-  #     - JENKINS_WEB_SOCKET=true
-  #   depends_on:
-  #     - jenkins
+  agent1:
+    build: 
+      context: .
+      dockerfile: agent.dockerfile
+    environment:
+      - JENKINS_AGENT_NAME=agent1
+      - JENKINS_URL=http://jenkins:8080
+      - JENKINS_AGENT_WORKDIR=/home/jenkins/agent
+      - JENKINS_WEB_SOCKET=true
+      - ADMIN_USERNAME=admin
+      - ADMIN_PASSWORD=admin
+    depends_on:
+      - jenkins
+  agent2:
+    build: 
+      context: .
+      dockerfile: agent.dockerfile
+    environment:
+      - JENKINS_AGENT_NAME=agent2
+      - JENKINS_URL=http://jenkins:8080
+      - JENKINS_AGENT_WORKDIR=/home/jenkins/agent
+      - JENKINS_WEB_SOCKET=true
+      - ADMIN_USERNAME=admin
+      - ADMIN_PASSWORD=admin
+    depends_on:
+      - jenkins

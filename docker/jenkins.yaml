@@ -1,5 +1,5 @@
 jenkins:
-  numExecutors: 3
+  numExecutors: 0
   mode: NORMAL
   markupFormatter:
     rawHtml:
@@ -16,16 +16,16 @@ jenkins:
   remotingSecurity:
     enabled: true
 
-  # nodes:
-  # - permanent:
-  #     name: "agent1"
-  #     launcher: "inbound"
-  #     remoteFS: "/home/jenkins/agent"
-  #     retentionStrategy: "always"
-  # - permanent:
-  #     name: "agent2"
-  #     launcher: "inbound"
-  #     remoteFS: "/home/jenkins/agent"
+  nodes:
+  - permanent:
+      name: "agent1"
+      launcher: "inbound"
+      remoteFS: "/home/jenkins/agent"
+      retentionStrategy: "always"
+  - permanent:
+      name: "agent2"
+      launcher: "inbound"
+      remoteFS: "/home/jenkins/agent"
 
 unclassified:
   location:
