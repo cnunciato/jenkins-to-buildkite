@@ -5,6 +5,10 @@ pipeline {
         nodejs "Node 22.x"
     }
 
+    options {
+        ansiColor('xterm')
+    }
+
     stages {
         stage('Install') {
             steps {
