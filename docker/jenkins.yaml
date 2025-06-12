@@ -32,7 +32,7 @@ unclassified:
     adminAddress: "admin@example.com"
     url: http://localhost:8080/
   gitHubConfiguration:
-    apiRateLimitChecker:  
+    apiRateLimitChecker: ThrottleOnOver
   gitHubPluginConfig:
     hookUrl: "http://jenkins:8080/github-webhook/"
     configs:
@@ -70,6 +70,7 @@ jobs:
                   id('jenkins-to-buildkite')
                   repoOwner('cnunciato')
                   repository('jenkins-to-buildkite')
+                  scanCredentialsId('github-pat')
               }
           }
           factory {
