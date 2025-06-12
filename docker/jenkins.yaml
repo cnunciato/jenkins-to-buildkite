@@ -8,8 +8,8 @@ jenkins:
     local:
       allowsSignup: false
       users:
-        - id: admin
-          password: admin
+        - id: ${ADMIN_USERNAME}
+          password: ${ADMIN_PASSWORD}
   authorizationStrategy:
     loggedInUsersCanDoAnything:
       allowAnonymousRead: false
@@ -32,9 +32,24 @@ unclassified:
     adminAddress: "admin@example.com"
     url: http://localhost:8080/
   gitHubConfiguration:
-    apiRateLimitChecker: NoThrottle
+    apiRateLimitChecker:  
   gitHubPluginConfig:
     hookUrl: "http://jenkins:8080/github-webhook/"
+    configs:
+      - name: "GitHub"
+        apiUrl: "https://api.github.com"
+        credentialsId: "github-pat"
+        manageHooks: false
+
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+          - usernamePassword:
+              id: "github-pat"
+              username: "${GITHUB_USERNAME}"
+              password: "${GITHUB_TOKEN}"
+              description: "${GITHUB_USERNAME}'s personal access token"
 
 tool:
   nodejs:
