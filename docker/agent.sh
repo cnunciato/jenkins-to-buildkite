@@ -2,11 +2,6 @@
 
 set -e
 
-echo $JENKINS_AGENT_NAME
-echo $JENKINS_URL
-echo $ADMIN_USERNAME
-echo $ADMIN_PASSWORD
-
 echo "Waiting for Jenkins to start..."
 sleep 10
 
