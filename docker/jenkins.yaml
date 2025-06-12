@@ -29,7 +29,7 @@ jenkins:
 
 unclassified:
   location:
-    adminAddress: "admin@example.com"
+    adminAddress: ${ADMIN_EMAIL}
     url: http://localhost:8080/
   gitHubConfiguration:
     apiRateLimitChecker: ThrottleOnOver

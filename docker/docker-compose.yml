@@ -9,12 +9,12 @@ services:
     volumes:
       - ./jenkins.yaml:/var/jenkins_home/jenkins.yml
     environment:
-      # - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
       - CASC_JENKINS_CONFIG=/var/jenkins_home/jenkins.yml
-      - GITHUB_USERNAME=cnunciato
+      - ADMIN_USERNAME=${ADMIN_USERNAME:-admin}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
+      - ADMIN_EMAIL=${ADMIN_EMAIL:-admin@example.com}
+      - GITHUB_USERNAME=${GITHUB_USERNAME}
       - GITHUB_TOKEN=${GITHUB_TOKEN}
-      - ADMIN_USERNAME=admin
-      - ADMIN_PASSWORD=admin
   agent1:
     build: 
       context: .
@@ -24,8 +24,8 @@ services:
       - JENKINS_URL=http://jenkins:8080
       - JENKINS_AGENT_WORKDIR=/home/jenkins/agent
       - JENKINS_WEB_SOCKET=true
-      - ADMIN_USERNAME=admin
-      - ADMIN_PASSWORD=admin
+      - ADMIN_USERNAME=${ADMIN_USERNAME:-admin}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
     depends_on:
       - jenkins
   agent2:
@@ -37,7 +37,7 @@ services:
       - JENKINS_URL=http://jenkins:8080
       - JENKINS_AGENT_WORKDIR=/home/jenkins/agent
       - JENKINS_WEB_SOCKET=true
-      - ADMIN_USERNAME=admin
-      - ADMIN_PASSWORD=admin
+      - ADMIN_USERNAME=${ADMIN_USERNAME:-admin}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
     depends_on:
       - jenkins

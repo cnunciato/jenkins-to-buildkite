@@ -10,10 +10,10 @@ ADMIN_PASSWORD=${ADMIN_PASSWORD}
 echo "Waiting for Jenkins to be up..."
 sleep 10
 
-# echo $JENKINS_AGENT_NAME
-# echo $JENKINS_URL
-# echo $ADMIN_USERNAME
-# echo $ADMIN_PASSWORD
+echo $JENKINS_AGENT_NAME
+echo $JENKINS_URL
+echo $ADMIN_USERNAME
+echo $ADMIN_PASSWORD
 # curl -s -X GET -u "${ADMIN_USERNAME}:${ADMIN_PASSWORD}" "${JENKINS_URL}/computer/$JENKINS_AGENT_NAME/slave-agent.jnlp"
 
 echo "Registering agent with Jenkins and retrieving secret..."
