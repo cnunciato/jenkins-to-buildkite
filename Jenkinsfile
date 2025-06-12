@@ -12,7 +12,9 @@ pipeline {
             }
             post {
                 always {
-                  currentBuild.description = "Aww, yeah."
+                    script {
+                        currentBuild.description = "Aww, yeah."
+                    }
                 }
             }
         }
@@ -22,7 +24,9 @@ pipeline {
             }
             post {
                 always {
-                  currentBuild.description = "Glad I put this tape in."
+                    script {
+                        currentBuild.description = "Glad I put this tape in."
+                    }
                 }
             }
         }
