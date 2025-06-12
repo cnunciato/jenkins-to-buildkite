@@ -1,11 +1,8 @@
-antisamy-markup-formatter
-build-name-setter
 configuration-as-code
 git
 github
 github-branch-source
 job-dsl
-junit
 nodejs
 workflow-aggregator
 workflow-multibranch
