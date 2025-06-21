@@ -1,0 +1,4 @@
+steps:
+  - label: ":jenkins: Run the pipeline"
+    commands: 
+      echo "Hi, world!"
